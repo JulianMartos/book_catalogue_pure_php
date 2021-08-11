@@ -24,5 +24,6 @@ Author:
 
 Editorial:
     Name: 150 characters
+    Phone: Check Phone Exist
     Address: (Maybe) Check Address
     Country: Coutry List
