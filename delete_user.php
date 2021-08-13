@@ -4,12 +4,12 @@ $pdo = require_once 'utils/database.php';
 
 $id = $_POST['id'] ?? null;
 if (!$id) {
-    header('Location: index.php');
+    header('Location: users.php');
     exit;
 }
 
-$statement = $pdo->prepare('DELETE FROM book WHERE b_id = :id');
+$statement = $pdo->prepare('DELETE FROM users WHERE u_id = :id');
 $statement->bindValue(':id', $id);
 $statement->execute();
 
-header('Location: index.php');
+header('Location: users.php');

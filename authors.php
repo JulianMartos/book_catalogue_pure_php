@@ -1,6 +1,7 @@
 <?php
 
 require_once "utils/database.php";
+require_once "utils/countries.php";
 
 $keyword = $_GET['search'] ?? null;
 
@@ -37,26 +38,30 @@ $books = $statement->fetchAll(PDO::FETCH_ASSOC);
 				<th scope="col">Phone Number</th>
 				<th scope="col">Address</th>
 				<th scope="col">Country</th>
+				<?php if (isset($_SESSION["username"])): ?>
 				<th scope="col">Actions</th>
+				<?php endif ?>
 			</tr>
 			</thead>
 			<tbody>
 				<?php foreach ($books as $id => $book):?>
 				<tr>
 				<th scope="row"><?php echo $id+1 ?></th>
-				<td><?php echo $book["name"]?></td>
+				<td><?php echo $book["a_name"]?></td>
 				<td><?php echo $book["lastName"]?></td>
-				<td><?php echo $book["phoneNumber"]?></td>
-				<td><?php echo $book["Address"]?></td>
-				<td><?php echo $book["Country"]?></td>
+				<td><?php echo $book["a_phoneNumber"]?></td>
+				<td><?php echo $book["a_address"]?></td>
+				<td><?php echo $countries[$book["a_country"]]?></td>
+				<?php if (isset($_SESSION["username"])): ?>
 				<td>
 					<a href="update_author.php?id=<?php echo $book['id'] ?>" class="btn btn-sm btn-outline-primary">Edit</a>
-					<form method="post" action="delete_book.php" style="display: inline-block">
+					<form method="post" action="delete_author.php" style="display: inline-block">
 						<input  type="hidden" name="id" value="<?php echo $book['id'] ?>"/>
 						<button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
 					</form>
 				</td> 
-				</tr>
+				<?php endif ?>
+			</tr>
 			</tbody>
 			<?php endforeach ?>
 		</table>

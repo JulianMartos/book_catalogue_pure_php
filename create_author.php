@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require_once 'views/authors/validate.php';
     echo $book_authors;
     if (empty($errors)) {
-        $statement = $pdo->prepare("INSERT INTO author (name, lastName, phoneNumber, Address, Country)
+        $statement = $pdo->prepare("INSERT INTO author (a_name, lastName, a_phoneNumber, a_address, a_country)
                 VALUES (:author_name, :author_lastName, :author_phoneNumber, :author_address, :author_country)");
         $statement->bindValue(':author_name', $author_name);
         $statement->bindValue(':author_lastName', $author_lastName);

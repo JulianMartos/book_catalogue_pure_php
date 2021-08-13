@@ -8,7 +8,7 @@ if (!$id) {
     exit;
 }
 
-$statement = $pdo->prepare('SELECT * FROM book WHERE id = :id');
+$statement = $pdo->prepare('SELECT * FROM book WHERE b_id = :id');
 $statement->bindValue(':id', $id);
 $statement->execute();
 $book = $statement->fetch(PDO::FETCH_ASSOC);
@@ -20,8 +20,6 @@ $book_authors =  $book['author_id'];
 $book_edit =     $book['editorial_id'];
 $book_pub_date = $book['dateOf_published'];
 
-
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     require_once 'views/books/validate.php';
@@ -31,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         title = :title,
          dateOf_published =  :book_pub_date,
           editorial_id = :book_edit, 
-          author_id = :book_authors WHERE id =:id" );
+          author_id = :book_authors WHERE b_id =:id" );
         $statement->bindValue(':title', $book_title);
         $statement->bindValue(':book_pub_date', date($book_pub_date));
         $statement->bindValue(':book_edit', (int)$book_edit);

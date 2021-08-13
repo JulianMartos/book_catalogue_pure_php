@@ -14,6 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     require_once 'views/books/validate.php';
     echo $book_authors;
+    echo $book_edit;
     if (empty($errors)) {
         $statement = $pdo->prepare("INSERT INTO book (title, dateOf_published, editorial_id, author_id)
                 VALUES (:title, :book_pub_date, :book_edit, :book_authors )");

@@ -1,16 +1,17 @@
 <?php
 
 require_once "utils/database.php";
+require_once "utils/funcions.php";
 
 $keyword = $_GET['search'] ?? null;
 
 
 
 if ($keyword) {
-    $statement = $pdo->prepare('SELECT * FROM book WHERE title like :keyword ORDER BY id ASC');
+    $statement = $pdo->prepare('SELECT b_id, title, dateOf_published, editorial.e_name , author.a_name, author.lastName FROM book_storage.book inner join book_storage.editorial on editorial_id = editorial.id inner join author on author_id; WHERE title like :keyword ORDER BY id ASC');
     $statement->bindValue(":keyword", "%$keyword%");
 } else {
-    $statement = $pdo->prepare('SELECT * FROM book ORDER BY id ASC');
+    $statement = $pdo->prepare('SELECT b_id, title, dateOf_published, editorial.e_name , author.a_name, author.lastName FROM book_storage.book inner join book_storage.editorial on editorial_id = editorial.id inner join author on author_id;');
 }
 $statement->execute();
 $books = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -36,7 +37,10 @@ $books = $statement->fetchAll(PDO::FETCH_ASSOC);
 				<th scope="col">Authors</th>
 				<th scope="col">Editorial</th>
 				<th scope="col">Published</th>
+				<?php if (isset($_SESSION["username"])): ?>
 				<th scope="col">Actions</th>
+				<?php endif ?>
+				
 			</tr>
 			</thead>
 			<tbody>
@@ -44,16 +48,18 @@ $books = $statement->fetchAll(PDO::FETCH_ASSOC);
 				<tr>
 				<th scope="row"><?php echo $id+1 ?></th>
 				<td><?php echo $book["title"]?></td>
-				<td><?php echo $book["author_id"]?></td>
-				<td><?php echo $book["editorial_id"]?></td>
+				<td><?php echo $book["a_name"] .' ' . $book['lastName']?></td>
+				<td><?php echo $book["e_name"]?></td>
 				<td><?php echo $book["dateOf_published"]?></td>
+				<?php if (isset($_SESSION["username"])): ?>
 				<td>
-					<a href="update_book.php?id=<?php echo $book['id'] ?>" class="btn btn-sm btn-outline-primary">Edit</a>
+					<a href="update_book.php?id=<?php echo $book['b_id'] ?>" class="btn btn-sm btn-outline-primary">Edit</a>
 					<form method="post" action="delete_book.php" style="display: inline-block">
-						<input  type="hidden" name="id" value="<?php echo $book['id'] ?>"/>
+						<input  type="hidden" name="id" value="<?php echo $book['b_id'] ?>"/>
 						<button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
 					</form>
 				</td> 
+				<?php endif ?>
 				</tr>
 			</tbody>
 			<?php endforeach ?>

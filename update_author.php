@@ -15,11 +15,11 @@ $author = $statement->fetch(PDO::FETCH_ASSOC);
 
 var_dump($author);
 
-$author_name =        $author['name'];
+$author_name =        $author['a_name'];
 $author_lastName =    $author['lastName'];
-$author_phoneNumber = $author['phoneNumber'];
-$author_address =     $author['Address'];
-$author_country =     $author['Country'];
+$author_phoneNumber = $author['a_phoneNumber'];
+$author_address =     $author['a_address'];
+$author_country =     $author['a_country'];
 
 
 
@@ -29,11 +29,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require_once 'views/authors/validate.php';
     if (empty($errors)) {
         $statement = $pdo->prepare("UPDATE author SET 
-        name = :author_name,
+        a_name = :author_name,
         lastName =  :author_lastName,
-        phoneNumber = :author_phoneNumber, 
-        Address = :author_address,
-        Country = :author_country
+        a_phoneNumber = :author_phoneNumber, 
+        a_address = :author_address,
+        a_country = :author_country
          WHERE id =:id" );
         $statement->bindValue(':author_name', $author_name);
         $statement->bindValue(':author_lastName', $author_lastName);
