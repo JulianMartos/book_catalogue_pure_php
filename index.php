@@ -8,10 +8,10 @@ $keyword = $_GET['search'] ?? null;
 
 
 if ($keyword) {
-    $statement = $pdo->prepare('SELECT b_id, title, dateOf_published, editorial.e_name , author.a_name, author.lastName FROM book_storage.book inner join book_storage.editorial on editorial_id = editorial.id inner join author on author_id; WHERE title like :keyword ORDER BY id ASC');
+    $statement = $pdo->prepare('SELECT b_id, title, dateOf_published, editorial.e_name , author.a_name, author.lastName FROM book_storage.book inner join book_storage.editorial on editorial_id = editorial.id inner join book_storage.author on author_id = author.id; WHERE title like :keyword ORDER BY id ASC');
     $statement->bindValue(":keyword", "%$keyword%");
 } else {
-    $statement = $pdo->prepare('SELECT b_id, title, dateOf_published, editorial.e_name , author.a_name, author.lastName FROM book_storage.book inner join book_storage.editorial on editorial_id = editorial.id inner join author on author_id;');
+    $statement = $pdo->prepare('SELECT b_id, title, dateOf_published, editorial.e_name , author.a_name, author.lastName FROM book_storage.book inner join book_storage.editorial on editorial_id = editorial.id inner join book_storage.author on author_id = author.id;');
 }
 $statement->execute();
 $books = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -64,7 +64,9 @@ $books = $statement->fetchAll(PDO::FETCH_ASSOC);
 			</tbody>
 			<?php endforeach ?>
 		</table>
+		<?php if (isset($_SESSION["username"])): ?>
 		<a href="create_book.php" type="button" class="btn btn-primary">Create New Record</a>
+		<?php endif ?>
 	</div>
 
 	</body>

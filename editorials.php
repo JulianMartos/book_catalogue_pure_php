@@ -61,7 +61,9 @@ $books = $statement->fetchAll(PDO::FETCH_ASSOC);
 			</tbody>
 			<?php endforeach ?>
 		</table>
+		<?php if (isset($_SESSION["username"])): ?>
 		<a href="create_editorial.php" type="button" class="btn btn-primary">Create New Record</a>
+		<?php endif ?>
 	</div>
 
 	</body>

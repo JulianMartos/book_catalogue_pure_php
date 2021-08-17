@@ -21,13 +21,13 @@ session_start();
       <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
 
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="index.php" class="nav-link px-2 link-secondary">Books</a></li>
+          <li><a href="index.php" class="nav-link px-2 link-dark">Books</a></li>
           <li><a href="authors.php" class="nav-link px-2 link-dark">Authors</a></li>
           <li><a href="editorials.php" class="nav-link px-2 link-dark">Editorials</a></li>
-          <li><a href="#" class="nav-link px-2 link-dark">Reports</a></li>
           <?php if (isset($_SESSION["username"])): ?>
           <li><a href="users.php" class="nav-link px-2 link-dark">Users</a></li>
           <?php endif ?>
+          <li><a href="reports.php" class="nav-link px-2 link">Download Report</a></li>
         </ul>
 
         <div class="col-md-3 text-end">
