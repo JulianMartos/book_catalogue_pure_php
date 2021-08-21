@@ -12,10 +12,10 @@
 
 		if(!empty($user_name) && !empty($password) && !is_numeric($user_name))
 		{ 
-      $statement = $pdo->prepare('SELECT * FROM users WHERE username = :username LIMIT 1');
-      $statement->bindValue(':username', $user_name);
-      $statement->execute();
-      $user = $statement->fetch(PDO::FETCH_ASSOC); 
+    	$statement = $pdo->prepare('SELECT * FROM users WHERE username = :username LIMIT 1');
+      	$statement->bindValue(':username', $user_name);
+      	$statement->execute();
+      	$user = $statement->fetch(PDO::FETCH_ASSOC); 
 			
 			if($user)
 			{
@@ -28,13 +28,13 @@
 					
 					}			
 					echo "<SCRIPT Language='JavaScript'>
-							alert('Wrong username or password');
+							alert('Wrong password');
 							window.location.href = 'login.php';
 						</SCRIPT>";
 
 				}    
         		echo "<SCRIPT Language='JavaScript'>
-						alert('Wrong username or password');
+						alert('Wrong username');
 						window.location.href = 'login.php';
 					</SCRIPT>";
 
