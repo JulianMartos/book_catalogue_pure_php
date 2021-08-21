@@ -20,7 +20,7 @@ $books = $statement->fetchAll(PDO::FETCH_ASSOC);
 ?>
 	<?php include_once "views/pageParts/header.php"; ?>
 	<div class="container">
-		<h2>Books in storage</h2><br>
+		<h2>Books in catalogue</h2><br>
 		<form action="" method="get">
 			<div class="input-group mb-3">
 			<input type="text" name="search" class="form-control" placeholder="Search" value="<?php echo $keyword ?>">

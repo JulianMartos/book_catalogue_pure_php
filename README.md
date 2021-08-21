@@ -1,8 +1,8 @@
-# book_storage
+# book_catalogue
  Trainig in PHP
 
 
-Manage books in the storage
+Manage books in the Catalogue
 
 1. CRUD book record
 2. Make reports of books in storage
